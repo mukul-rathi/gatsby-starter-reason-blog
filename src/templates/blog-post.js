@@ -1,12 +1,12 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import {graphql, Link} from 'gatsby'
+import React from 'react'
 
-import Bio from "../components/bio"
-import Layout from "../components/layout.re"
-import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
+import Bio from '../components/bio'
+import Layout from '../components/layout.re'
+import SEO from '../components/seo.bs'
+import {rhythm, scale} from '../utils/typography'
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
+const BlogPostTemplate = ({data, pageContext, location}) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
@@ -60,14 +60,14 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
+              <Link to={previous.fields.slug} rel='prev'>
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
+              <Link to={next.fields.slug} rel='next'>
                 {next.frontmatter.title} →
               </Link>
             )}

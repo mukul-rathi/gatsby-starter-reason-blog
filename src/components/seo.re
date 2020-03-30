@@ -4,23 +4,22 @@
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
-
-
 module Helmet = Gatsby.Helmet;
 
 [@bs.module "gatsby"] external useStaticQuery: string => 'a = "useStaticQuery";
 
-
-[@bs.module "gatsby"] external graphql : 'a  = "graphql"; /* this doesn't seem to do anything, so raw  imported it below */
-[%%bs.raw {| import  {graphql}  from "gatsby" |}]
+[@bs.module "gatsby"] external graphql: 'a = "graphql"; /* this doesn't seem to do anything, so raw  imported it below */
+%bs.raw
+{| import  {graphql}  from "gatsby" |};
 
 [@react.component]
 let make = (~description, ~lang, ~meta, ~title) => {
   let query =
     useStaticQuery(
-        [%raw {| graphql`
-      query {
+      [%bs.raw
+        {|
+           graphql`
+            query {
         site {
           siteMetadata {
             title
@@ -29,24 +28,32 @@ let make = (~description, ~lang, ~meta, ~title) => {
           }
         }
       }
-    `|}]
+    `
+    |}
+      ],
     );
-    let siteMetadata = query##site##siteMetadata;
+  let siteMetadata = query##site##siteMetadata;
   let metaDescription =
     switch (description) {
     | Some(descriptionVal) => descriptionVal
     | None => siteMetadata##description
     };
-  let htmlAttributes: {. lang: string} = {
-    pub lang =
-    (  switch (lang) {
-      | Some(langVal) => langVal
-      | None => "en"
-      }
-    )
-  };
-  let metaTags = [%bs.raw {|  /* TODO: convert to ReasonML types */
-    [
+  let titleTemplate = "%s | " ++ siteMetadata##title;
+  let langOrDefault =
+    switch (lang) {
+    | Some(langVal) => langVal
+    | None => "en"
+    };
+  let htmlAttributesFun = [%bs.raw
+    {|
+    (lang => ({
+        lang,
+      }))
+    |}
+  ];
+  let metaTagsFun = [%bs.raw
+    {| (description, siteMetadata, title, metaDescription, meta) =>
+      [
         {
           name: `description`,
           content: metaDescription,
@@ -69,7 +76,7 @@ let make = (~description, ~lang, ~meta, ~title) => {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: siteMetadata.author,
         },
         {
           name: `twitter:title`,
@@ -80,14 +87,14 @@ let make = (~description, ~lang, ~meta, ~title) => {
           content: metaDescription,
         },
       ].concat(meta)
-    |}];
-    let titleTemplate="%s | " ++ siteMetadata##title;
+      |}
+  ];
   <Helmet
-    htmlAttributes
     title
     titleTemplate
-    meta=metaTags
-  />
+    htmlAttributes={htmlAttributesFun(langOrDefault)}
+    meta={metaTagsFun(description, title, metaDescription, meta)}
+  />;
 };
 
 React.setDisplayName(make, "SEO");

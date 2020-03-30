@@ -1,18 +1,18 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import {graphql, Link} from 'gatsby'
+import React from 'react'
 
-import Bio from "../components/bio"
-import Layout from "../components/layout.re"
-import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import Bio from '../components/bio'
+import Layout from '../components/layout.re'
+import SEO from '../components/seo.bs'
+import {rhythm} from '../utils/typography'
 
-const BlogIndex = ({ data, location }) => {
+const BlogIndex = ({data, location}) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
+      <SEO title='All posts' />
       <Bio />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
