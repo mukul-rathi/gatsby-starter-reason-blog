@@ -35,43 +35,23 @@ module Helmet = {
     "default";
 };
 
-/* old reason react imports (v2 syntax)
- module SocialIcons = {
-   [@bs.module "react-social-icons"]
-   external linkClass: ReasonReact.reactClass = "default";
-   let make =
-       (
-         ~urls: array(string),
-         ~className: option(string)=?,
-         ~color: option(string)=?,
-         _children,
-       ) => {
-     let props = {
-       "urls": urls,
-       "className": Js.Nullable.fromOption(className),
-       "color": Js.Nullable.fromOption(color),
-     };
-     ReasonReact.wrapJsForReason(~reactClass=linkClass, ~props, _children);
-   };
- };
-
- module SocialIcon = {
-   [@bs.module "react-social-icons"]
-   external linkClass: ReasonReact.reactClass = "SocialIcon";
-   let make =
-       (
-         ~url: string,
-         ~className: option(string)=?,
-         ~color: option(string)=?,
-         ~network: option(string)=?,
-         _children,
-       ) => {
-     let props = {
-       "url": url,
-       "className": Js.Nullable.fromOption(className),
-       "color": Js.Nullable.fromOption(color),
-       "network": Js.Nullable.fromOption(network),
-     };
-     ReasonReact.wrapJsForReason(~reactClass=linkClass, ~props, _children);
-   };
- }; */
+module Image = {
+  [@bs.module "gatsby-image"] [@react.component]
+  external make:
+    (
+      ~resolutions: option('any)=?,
+      ~sizes: option('any)=?,
+      ~fixed: option('any)=?,
+      ~fluid: option('any)=?,
+      ~title: option(string)=?,
+      ~alt: option(string)=?,
+      ~className: option(string)=?,
+      ~critical: option(bool)=?,
+      ~style: option(ReactDOMRe.Style.t)=?,
+      ~imgStyle: option(ReactDOMRe.Style.t)=?,
+      ~placeholderStyle: option(ReactDOMRe.Style.t)=?,
+      ~placeholderClassName: option(string)=?
+    ) =>
+    React.element =
+    "default";
+};
