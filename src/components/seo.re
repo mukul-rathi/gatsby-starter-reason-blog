@@ -49,13 +49,7 @@ let make = (~description, ~lang, ~meta, ~title) => {
     | Some(metaVal) => metaVal
     | None => []
     };
-  let htmlAttributesFun = [%bs.raw
-    {|
-    (lang => ({
-        lang,
-      }))
-    |}
-  ];
+  let htmlAttributes: {. lang: string} = {pub lang = langOrDefault};
   let metaTagsFun = [%bs.raw
     {| (siteMetadata, title, metaDescription, meta) =>
       [
@@ -97,7 +91,7 @@ let make = (~description, ~lang, ~meta, ~title) => {
   <Helmet
     title
     titleTemplate
-    htmlAttributes={htmlAttributesFun(langOrDefault)}
+    htmlAttributes
     meta={metaTagsFun(siteMetadata, title, metaDescription, metaOrDefault)}
   />;
 };
