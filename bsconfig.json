@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-reason-blog",
+  "name": "gatsby-starter-reason-blog",
   "namespace": true,
   "reason": { "react-jsx": 3 },
   "bs-dependencies": ["reason-react"],
