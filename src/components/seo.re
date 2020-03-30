@@ -44,6 +44,11 @@ let make = (~description, ~lang, ~meta, ~title) => {
     | Some(langVal) => langVal
     | None => "en"
     };
+  let metaOrDefault =
+    switch (meta) {
+    | Some(metaVal) => metaVal
+    | None => []
+    };
   let htmlAttributesFun = [%bs.raw
     {|
     (lang => ({
@@ -52,7 +57,7 @@ let make = (~description, ~lang, ~meta, ~title) => {
     |}
   ];
   let metaTagsFun = [%bs.raw
-    {| (description, siteMetadata, title, metaDescription, meta) =>
+    {| (siteMetadata, title, metaDescription, meta) =>
       [
         {
           name: `description`,
@@ -93,7 +98,7 @@ let make = (~description, ~lang, ~meta, ~title) => {
     title
     titleTemplate
     htmlAttributes={htmlAttributesFun(langOrDefault)}
-    meta={metaTagsFun(description, title, metaDescription, meta)}
+    meta={metaTagsFun(siteMetadata, title, metaDescription, metaOrDefault)}
   />;
 };
 
