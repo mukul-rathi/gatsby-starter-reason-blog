@@ -2,7 +2,7 @@ module Link = {
   [@bs.module "gatsby-link"] [@react.component]
   external make:
     (
-      ~to_: string,
+      ~_to: string, /* "to" is a reserved keyword in Reason, BuckleScript compiles _to  -> to in raw JS (quirky I know!)  */
       ~rel: option(string)=?,
       ~className: option(string)=?,
       ~style: option(ReactDOMRe.Style.t)=?,

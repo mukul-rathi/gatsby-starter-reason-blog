@@ -42,7 +42,7 @@ let make = (~location: locationType, ~title, ~children) => {
               (),
             )
           }
-          to_="/">
+          _to="/">
           {React.string(title)}
         </Link>
       </h1>;
@@ -64,7 +64,7 @@ let make = (~location: locationType, ~title, ~children) => {
               (),
             )
           }
-          to_="/">
+          _to="/">
           {React.string(title)}
         </Link>
       </h3>;
