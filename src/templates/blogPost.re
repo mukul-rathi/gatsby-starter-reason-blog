@@ -72,8 +72,9 @@ let make = (~data, ~pageContext, ~location) => {
           {
             switch (Js.Nullable.toOption(previous)) {
             | Some(previousVal) =>
+              /* previousVal is neither undefined nor null */
               <Link _to=previousVal##fields##slug rel="prev">
-                {React.string("←" ++ previousVal##frontmatter##title)}
+                {React.string(previousVal##frontmatter##title)}
               </Link>
             | None => React.null
             }
@@ -84,7 +85,7 @@ let make = (~data, ~pageContext, ~location) => {
             switch (Js.Nullable.toOption(next)) {
             | Some(nextVal) =>
               <Link _to=nextVal##fields##slug rel="next">
-                {React.string(nextVal##frontmatter##title ++ "→")}
+                {React.string(nextVal##frontmatter##title)}
               </Link>
             | None => React.null
             }

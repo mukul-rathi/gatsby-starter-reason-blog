@@ -26,8 +26,6 @@ let make = (~location: locationType, ~title, ~children) => {
           ReactDOMRe.Style.make(
             ~fontSize=scale(1.5)##fontSize,
             ~lineHeight=scale(1.5)##lineHeight,
-            ~color="black",
-            ~padding="15px",
             ~marginBottom=rhythm(1.5),
             ~marginTop="0",
             (),

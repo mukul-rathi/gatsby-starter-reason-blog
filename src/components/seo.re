@@ -8,13 +8,13 @@ module Helmet = Gatsby.Helmet;
 
 [@bs.module "gatsby"] external useStaticQuery: string => 'a = "useStaticQuery";
 
-[@bs.module "gatsby"] external graphql: 'a = "graphql"; /* this doesn't seem to do anything, so raw  imported it below */
+/* raw import used because no Reason support for Gatsby graphql queries */
 %bs.raw
 {| import  {graphql}  from "gatsby" |};
 
 [@react.component]
 let make = (~description, ~lang="en", ~meta=[], ~title) => {
-  let query =
+  let data =
     useStaticQuery(
       [%bs.raw
         {|
@@ -32,7 +32,7 @@ let make = (~description, ~lang="en", ~meta=[], ~title) => {
     |}
       ],
     );
-  let siteMetadata = query##site##siteMetadata;
+  let siteMetadata = data##site##siteMetadata;
   let metaDescription =
     switch (description) {
     | Some(descriptionVal) => descriptionVal
@@ -40,6 +40,8 @@ let make = (~description, ~lang="en", ~meta=[], ~title) => {
     };
   let titleTemplate = "%s | " ++ siteMetadata##title;
   let htmlAttributes = {"lang": lang};
+
+  /* Example of embedding raw JS into our Reason code. */
   let metaTagsFun = [%bs.raw
     {| (siteMetadata, title, metaDescription, meta) =>
       [
