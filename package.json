@@ -40,7 +40,7 @@
   "devDependencies": {
     "prettier": "^1.19.1"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://github.com/mukul-rathi/gatsby-starter-reason-blog#readme",
   "keywords": [
     "gatsby"
   ],
@@ -48,7 +48,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/mukul-rathi/gatsby-starter-reason-blog.git"
   },
   "scripts": {
     "build": "bsb -make-world && gatsby build",
