@@ -4,6 +4,8 @@ A starter that uses ReasonML with Gatsby. We're using the [latest v3 Reason JSX 
 
 Happy coding! I've written a [blog post explaining this repo in more depth](https://mukulrathi.com/gatsby-reasonml-tutorial/).
 
+Feel free to submit issues if you feel this can be improved!
+
 ## Installation
 
 This is a Gatsby starter repo:
@@ -13,6 +15,8 @@ This is a Gatsby starter repo:
 ## Tips
 
 JS interop with Reason can be a little messy at times. [This article](https://reasonml.github.io/docs/en/converting-from-js) helps you convert from JS. If `localhost:8000` displays uncaught TypeError messages when running `gatsby develop` but your Reason code compiles, check your JS-Reason bindings (imports/exports). :)
+
+`src/utils/gatsby.re` contains type wrappers for some Gatsby React components like `<Link/>` and `<Helmet/>`.
 
 ## GraphQL workarounds
 
