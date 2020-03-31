@@ -13,7 +13,7 @@ module Helmet = Gatsby.Helmet;
 {| import  {graphql}  from "gatsby" |};
 
 [@react.component]
-let make = (~description, ~lang, ~meta, ~title) => {
+let make = (~description, ~lang="en", ~meta=[], ~title) => {
   let query =
     useStaticQuery(
       [%bs.raw
@@ -39,17 +39,7 @@ let make = (~description, ~lang, ~meta, ~title) => {
     | None => siteMetadata##description
     };
   let titleTemplate = "%s | " ++ siteMetadata##title;
-  let langOrDefault =
-    switch (lang) {
-    | Some(langVal) => langVal
-    | None => "en"
-    };
-  let metaOrDefault =
-    switch (meta) {
-    | Some(metaVal) => metaVal
-    | None => []
-    };
-  let htmlAttributes: {. lang: string} = {pub lang = langOrDefault};
+  let htmlAttributes = {"lang": lang};
   let metaTagsFun = [%bs.raw
     {| (siteMetadata, title, metaDescription, meta) =>
       [
@@ -92,7 +82,7 @@ let make = (~description, ~lang, ~meta, ~title) => {
     title
     titleTemplate
     htmlAttributes
-    meta={metaTagsFun(siteMetadata, title, metaDescription, metaOrDefault)}
+    meta={metaTagsFun(siteMetadata, title, metaDescription, meta)}
   />;
 };
 

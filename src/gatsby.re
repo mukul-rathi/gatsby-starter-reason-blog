@@ -3,6 +3,7 @@ module Link = {
   external make:
     (
       ~to_: string,
+      ~rel: option(string)=?,
       ~className: option(string)=?,
       ~style: option(ReactDOMRe.Style.t)=?,
       ~activeStyle: option(ReactDOMRe.Style.t)=?,
