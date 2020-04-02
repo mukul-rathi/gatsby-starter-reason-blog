@@ -12,9 +12,18 @@ module Helmet = Gatsby.Helmet;
 %bs.raw
 {| import  {graphql}  from "gatsby" |};
 
+/* We can define the types of fields of JS objects, and thus use them as records in ReasonML */
+type siteMetadataType = {
+  title: string,
+  description: string,
+  author: string,
+};
+type siteType = {siteMetadata: siteMetadataType};
+type queryResType = {site: siteType};
+
 [@react.component]
 let make = (~description, ~lang="en", ~meta=[], ~title) => {
-  let data =
+  let data: queryResType =
     useStaticQuery(
       [%bs.raw
         {|
@@ -32,13 +41,13 @@ let make = (~description, ~lang="en", ~meta=[], ~title) => {
     |}
       ],
     );
-  let siteMetadata = data##site##siteMetadata;
+  let siteMetadata = data.site.siteMetadata;
   let metaDescription =
     switch (description) {
     | Some(descriptionVal) => descriptionVal
-    | None => siteMetadata##description
+    | None => siteMetadata.description
     };
-  let titleTemplate = "%s | " ++ siteMetadata##title;
+  let titleTemplate = "%s | " ++ siteMetadata.title;
   let htmlAttributes = {"lang": lang};
 
   /* Example of embedding raw JS into our Reason code. */

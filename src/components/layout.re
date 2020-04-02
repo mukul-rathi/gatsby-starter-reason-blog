@@ -2,30 +2,29 @@ module Link = Gatsby.Link;
 
 [@bs.module "../utils/typography.js"]
 external rhythm: float => string = "rhythm";
+
+type scaleReturnType = {
+  fontSize: string,
+  lineHeight: string,
+};
+
 [@bs.module "../utils/typography.js"]
-external scale:
-  float =>
-  {
-    .
-    "fontSize": string,
-    "lineHeight": string,
-  } =
-  "scale";
+external scale: float => scaleReturnType = "scale";
 
 [@bs.val] external pathPrefix: string = "__PATH_PREFIX__";
 
-type locationType = {. "pathname": string};
+type locationType = {pathname: string};
 
 [@react.component]
 let make = (~location: locationType, ~title, ~children) => {
   let rootPath = pathPrefix ++ "/";
   let header =
-    if (location##pathname === rootPath) {
+    if (location.pathname === rootPath) {
       <h1
         style={
           ReactDOMRe.Style.make(
-            ~fontSize=scale(1.5)##fontSize,
-            ~lineHeight=scale(1.5)##lineHeight,
+            ~fontSize=scale(1.5).fontSize,
+            ~lineHeight=scale(1.5).lineHeight,
             ~marginBottom=rhythm(1.5),
             ~marginTop="0",
             (),
