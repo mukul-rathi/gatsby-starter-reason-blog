@@ -11,17 +11,12 @@ Feel free to submit issues if you feel this can be improved!
 This is a Gatsby starter repo so install it using the Gatsby CLI by running
 
 `gatsby new your-gatsby-blog https://github.com/mukul-rathi/gatsby-starter-reason-blog/`
-
-Alternatively you can fork this repo and then clone it:
-
-`git clone https://github.com/your-github-username/gatsby-starter-reason-blog/`
-
 Then to set up the repo:
 
 ```bash
 cd your-gatsby-blog
-yarn install  # install dependencies
-yarn develop # or gatsby develop
+npm install
+gatsby develop
 ```
 
 Your site is now running at `https://localhost:8000/`! Start making changes to the source code and see the site update live!
@@ -30,13 +25,15 @@ To learn more about Gatsby head to the [Gatsby website](https://www.gatsbyjs.org
 
 The structure of this repository is based off the [Gatsby starter blog](https://github.com/gatsbyjs/gatsby-starter-blog) - check that README out if you want more information about the top level structure of a typical Gatsby project.
 
+To build a production build of the website, run `npm run build`. This first compiles your Reason files by running `bsb -make-world`, and then creates your production build by running `gatsby build`. (You can see the `npm run build` script in the `package.json` file).
+
 ## Tips
 
 JS interop with Reason can be a little messy at times. [This article](https://reasonml.github.io/docs/en/converting-from-js) helps you convert from JS. If `localhost:8000` displays uncaught TypeError messages when running `gatsby develop` but your Reason code compiles, check your JS-Reason bindings (imports/exports). :)
 
 `src/utils/gatsby.re` contains type wrappers for some Gatsby React components like `<Link/>` and `<Helmet/>`.
 
-## GraphQL workarounds
+## GraphQL workarounds for Reason Files
 
 Gatsby's GraphQL parser only works with JS files. So if you have a StaticQuery in your component, you need to write raw JS (graphql templated string), and wrap it in `[%bs.raw]`.
 
