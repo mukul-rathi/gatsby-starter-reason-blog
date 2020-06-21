@@ -2,7 +2,7 @@
 
 A starter that uses ReasonML with Gatsby. We're using the [latest v3 Reason JSX syntax](https://reasonml.github.io/reason-react/docs/en/jsx), there are also a [couple](https://github.com/ReasonVienna/reason-conf) of [other](https://github.com/jtberglund/gatsby-starter-reason) Gatsby sites using the old syntax. I would recommend you stick with the cleaner v3 syntax.
 
-Happy coding! I've written a [blog post explaining this repo in more depth](https://mukulrathi.com/gatsby-reasonml-tutorial/).
+Happy coding! I've written a [blog post explaining this repo in more depth](https://mukulrathi.netlify.app/gatsby-reasonml-tutorial/).
 
 Feel free to submit issues if you feel this can be improved!
 
